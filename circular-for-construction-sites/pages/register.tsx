@@ -76,7 +76,7 @@ const Register: NextPage = (): JSX.Element => {
               type="password"
               minLength={8}
               maxLength={32}
-              pattern="[0-9a-fA-F]{8,32}"
+              pattern="[0-9a-zA-Z]{8,32}"
               onChange={(e): void => {
                 setPassword(e.target.value);
               }}
