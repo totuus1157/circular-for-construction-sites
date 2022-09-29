@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import { useState } from "react";
+import { useRouter } from "next/router";
 import Header from "../components/Header";
 import { getAuth } from "firebase/auth";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
@@ -16,6 +17,7 @@ const Register: NextPage = (): JSX.Element => {
   const [password, setPassword] = useState("");
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
+  const router = useRouter();
 
   console.log(email);
   console.log(password);
@@ -34,11 +36,7 @@ const Register: NextPage = (): JSX.Element => {
     return <p>Loading...</p>;
   }
   if (user) {
-    return (
-      <div>
-        <p>Registered User: {user.user.email}</p>
-      </div>
-    );
+    router.push("/addition");
   }
   return (
     <div className={styles.container}>
