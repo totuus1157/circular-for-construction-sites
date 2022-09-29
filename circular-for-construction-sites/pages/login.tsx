@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import { useState } from "react";
+import { useRouter } from "next/router";
 import Header from "../components/Header";
 import { getAuth } from "firebase/auth";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
@@ -16,6 +17,7 @@ const SignIn: NextPage = (): JSX.Element => {
   const [password, setPassword] = useState("");
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
+  const router = useRouter();
 
   console.log(email);
   console.log(password);
@@ -33,13 +35,6 @@ const SignIn: NextPage = (): JSX.Element => {
   if (loading) {
     return <p>Loading...</p>;
   }
-  if (user) {
-    return (
-      <div>
-        <p>Signed In User: {user.user.email}</p>
-      </div>
-    );
-  }
   return (
     <div className={styles.container}>
       <Header title="ログイン" />
@@ -55,7 +50,9 @@ const SignIn: NextPage = (): JSX.Element => {
 
         <Form
           onSubmit={(): void => {
-            signInWithEmailAndPassword(email, password);
+            signInWithEmailAndPassword(email, password).then((): void => {
+              router.push("/news");
+            });
           }}
         >
           <Form.Group className="mb-3" controlId="formBasicEmail">
