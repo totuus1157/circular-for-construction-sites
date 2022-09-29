@@ -10,7 +10,7 @@ const firebaseConfig = {
   projectId: "circular-for-construction-site",
   storageBucket: "circular-for-construction-site.appspot.com",
   messagingSenderId: "427904359731",
-  appId: "1:427904359731:web:9a5fd6b248ace8f91f7246"
+  appId: "1:427904359731:web:9a5fd6b248ace8f91f7246",
 };
 
 // Initialize Firebase
