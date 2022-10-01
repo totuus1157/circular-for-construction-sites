@@ -78,7 +78,7 @@ const Addition: NextPage = (): JSX.Element => {
           <h1 className={styles.title}>基本情報</h1>
 
           <Form onSubmit={handleSubmit}>
-            <Form.Group className="mb-3" controlId="formBasicName">
+            <Form.Group className="mb-3" controlId="formBasicText">
               <Form.Label>名前</Form.Label>
               <Form.Control
                 required
@@ -89,7 +89,7 @@ const Addition: NextPage = (): JSX.Element => {
                 placeholder="湊　未来"
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicAria">
+            <Form.Group className="mb-3" controlId="formBasicSelect1">
               <Form.Label>エリア</Form.Label>
               <Form.Select
                 onChange={(e): void => {
@@ -102,7 +102,7 @@ const Addition: NextPage = (): JSX.Element => {
                 <option value="c">C(Offsite)</option>
               </Form.Select>
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicSection">
+            <Form.Group className="mb-3" controlId="formBasicSelect2">
               <Form.Label>セクション</Form.Label>
               <Form.Select
                 onChange={(e): void => {
