@@ -1,11 +1,10 @@
 import type { NextPage } from "next";
 import Link from "next/link";
 import Header from "../components/Header";
-import styles from "../styles/Home.module.css";
 import { getAuth, signOut } from "firebase/auth";
-import "../components/fire";
+import { auth } from '../components/firebase'
+import styles from "../styles/Home.module.css";
 
-const auth = getAuth();
 signOut(auth);
 
 const Home: NextPage = (): JSX.Element => {

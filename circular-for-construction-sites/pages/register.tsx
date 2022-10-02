@@ -2,15 +2,12 @@ import type { NextPage } from "next";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import Header from "../components/Header";
-import { getAuth } from "firebase/auth";
+import { auth } from '../components/firebase'
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import styles from "../styles/Home.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../components/fire";
-
-const auth = getAuth();
 
 const Register: NextPage = (): JSX.Element => {
   const [email, setEmail] = useState("");

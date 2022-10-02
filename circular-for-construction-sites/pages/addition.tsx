@@ -2,17 +2,15 @@ import type { NextPage } from "next";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Header from "../components/Header";
-import { getFirestore, doc, setDoc } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
+import { db, auth } from "../components/firebase";
+import { doc, setDoc } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import styles from "../styles/Home.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../components/fire";
 
-const db = getFirestore();
-const auth = getAuth();
+console.log("db: ", db);
 
 const Addition: NextPage = (): JSX.Element => {
   const [name, setName] = useState("");
@@ -21,13 +19,13 @@ const Addition: NextPage = (): JSX.Element => {
   const [user, loading, error] = useAuthState(auth);
   const router = useRouter();
 
-  console.log(name);
-  console.log(area);
-  console.log(section);
-  console.log("user: ", user);
-  console.log("loading: ", loading);
-  console.log("error: ", error);
-
+  /* console.log(name);
+   * console.log(area);
+   * console.log(section);
+   * console.log("user: ", user);
+   * console.log("loading: ", loading);
+   * console.log("error: ", error);
+   */
   useEffect((): void => {
     if (user === null) {
       router.push("/");
@@ -66,7 +64,7 @@ const Addition: NextPage = (): JSX.Element => {
   if (user) {
     return (
       <div className={styles.container}>
-        <Header title="基本情報" />
+        <Header title="あなたの情報" />
 
         <style jsx>{`
           h1 {
@@ -75,7 +73,7 @@ const Addition: NextPage = (): JSX.Element => {
         `}</style>
 
         <main className={styles.main}>
-          <h1 className={styles.title}>基本情報</h1>
+          <h1 className={styles.title}>あなたの情報</h1>
 
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formBasicText">
