@@ -60,9 +60,9 @@ const NewsPosts: NextPage = (): JSX.Element => {
     const docRef = collection(db, "users", userInfo.email, "articles");
     await addDoc(docRef, {
       article: article,
+      from: { area: userInfo.area, section: userInfo.section },
       to: { area: area, section: section },
-      area: userInfo.area,
-      section: userInfo.section,
+      name: userInfo.name,
       timestamp: serverTimestamp(),
     }).then((): void => {
       router.push("/news");
