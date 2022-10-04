@@ -2,9 +2,6 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import jaLocale from "@fullcalendar/core/locales/ja";
-import "../node_modules/@fullcalendar/common/main.min.css";
-import "../node_modules/@fullcalendar/daygrid/main.min.css";
-import "../node_modules/@fullcalendar/timegrid/main.min.css";
 
 function Calendar(props): JSX.Element {
   return (
