@@ -25,6 +25,8 @@ function News(): JSX.Element {
   console.log("error: ", error);
   console.log("userInfo: ", userInfo);
 
+  const titleProp: string = "回覧板";
+
   useEffect((): void => {
     if (user !== null && user !== undefined) {
       const userId = user.email;
@@ -60,8 +62,8 @@ function News(): JSX.Element {
   if (user) {
     return (
       <>
-        <Header title="ニュース" />
-        <ControlPanel name={userInfo.name} />
+        <Header title={titleProp}/>
+        <ControlPanel name={userInfo.name} brand={titleProp} />
         <UserDisplay name={userInfo.name} />
         <Articles
           userId={userInfo.email}
