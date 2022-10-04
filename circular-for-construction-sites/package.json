@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fullcalendar/daygrid": "^5.11.3",
+    "@fullcalendar/react": "^5.11.2",
     "bootstrap": "^5.2.1",
     "firebase": "^9.10.0",
     "next": "^12.3.1",
