@@ -70,7 +70,6 @@ function News(): JSX.Element {
           section={userInfo.section}
         />
         <Footer />
-        {/* <entryButton /> */}
       </>
     );
   }
