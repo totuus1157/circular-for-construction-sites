@@ -62,15 +62,10 @@ function News(): JSX.Element {
   if (user) {
     return (
       <>
-        <Header title={titleProp}/>
+        <Header title={titleProp} />
         <ControlPanel name={userInfo.name} brand={titleProp} />
         <UserDisplay name={userInfo.name} />
-        <Articles
-          userId={userInfo.email}
-          name={userInfo.name}
-          area={userInfo.area}
-          section={userInfo.section}
-        />
+        <Articles />
         <Footer />
       </>
     );
