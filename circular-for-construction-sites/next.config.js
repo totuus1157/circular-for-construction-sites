@@ -5,7 +5,7 @@ const removeImports = require("next-remove-imports")({
 });
 
 module.exports = removeImports({
-  webpack(config, options) {
+  webpack(config, _options) {
     return config;
   },
 });
