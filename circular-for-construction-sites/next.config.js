@@ -1,19 +1,12 @@
-// next.config.js
-const removeImports = require("next-remove-imports")({
-  test: /node_modules([\s\S]*?)\.(tsx|ts|js|mjs|jsx)$/,
-  matchImports: "\\.(less|css|scss|sass|styl)$",
-});
-
-module.exports = removeImports({
-  webpack(config, _options) {
-    return config;
-  },
-});
+const withTM = require("next-transpile-modules")([
+  "@fullcalendar/common",
+  "@fullcalendar/timegrid",
+  "@fullcalendar/daygrid",
+  "@fullcalendar/react",
+]);
 
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+module.exports = withTM({
   reactStrictMode: true,
   swcMinify: true,
-};
-
-module.exports = nextConfig;
+});
