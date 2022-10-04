@@ -79,7 +79,8 @@ function ControlPanel(props: Props): JSX.Element {
             variant="outline-light"
             onClick={(): Promise<boolean> => router.push("/newsPosts")}
           >
-            書き込み
+            {brand === "回覧板" && "書き込み"}
+            {brand === "カレンダー" && "予定登録"}
           </Button>
         </Navbar.Collapse>
       </Container>
