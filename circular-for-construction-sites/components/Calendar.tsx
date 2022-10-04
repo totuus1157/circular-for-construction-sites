@@ -10,7 +10,7 @@ function Calendar(props): JSX.Element {
       headerToolbar={{
         left: "prev,next",
         center: "title",
-        right: "dayGridMonth,dayGridWeek",
+        right: "dayGridMonth,timeGridWeek,timeGridDay",
       }}
       initialView="dayGridMonth" // 初期表示のモードを設定する
       events={"https://fullcalendar.io/api/demo-feeds/events.json"}
