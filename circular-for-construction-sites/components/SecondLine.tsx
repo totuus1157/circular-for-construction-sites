@@ -12,12 +12,12 @@ function SecondLine(props: Props): JSX.Element {
 
   return (
     <>
-      {" "}
       <style jsx>{`
         div {
           margin-bottom: 1rem;
         }
       `}</style>
+
       <div className="d-flex justify-content-between">
         <UpdateButton counter={counter} setCounter={setCounter} />
         <UserDisplay name={name} />
