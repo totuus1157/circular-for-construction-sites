@@ -18,9 +18,9 @@ import styles from "../styles/Home.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const SchedulePosts: NextPage = (): JSX.Element => {
-  const [article, setArticle] = useState("");
-  const [area, setArea] = useState("");
-  const [section, setSection] = useState("");
+  const [plan, setPlan] = useState("");
+  const [start, setStart] = useState("");
+  const [end, setEnd] = useState("");
   const [user, loading, error] = useAuthState(auth);
   const [userInfo, setUserInfo] = useState<DocumentData>({
     area: "",
@@ -57,15 +57,16 @@ const SchedulePosts: NextPage = (): JSX.Element => {
     preventDefault: () => void;
   }): Promise<void> => {
     event.preventDefault();
-    const docRef = collection(db, "users", userInfo.email, "articles");
+    const docRef = collection(db, "users", userInfo.email, "schedules");
     await addDoc(docRef, {
-      article: article,
+      plan: plan,
+      start: start,
+      end: end,
       from: { area: userInfo.area, section: userInfo.section },
-      to: { area: area, section: section },
       name: userInfo.name,
       timestamp: serverTimestamp(),
     }).then((): void => {
-      router.push("/news");
+      router.push("/calendar");
     });
   };
 
@@ -105,28 +106,34 @@ const SchedulePosts: NextPage = (): JSX.Element => {
                 as="textarea"
                 rows={3}
                 onChange={(e): void => {
-                  setArticle(e.target.value);
+                  setPlan(e.target.value);
                 }}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="datetimeBasicSelect1">
               <Form.Label>開始（単位：１時間）</Form.Label>
               <Form.Control
+                required
                 type="datetime-local"
                 min="2022-09-20T00:00"
                 max="2025-09-19T23:59"
                 step="3600"
-                required
+                onChange={(e): void => {
+                  setStart(e.target.value);
+                }}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="datetimeBasicSelect2">
               <Form.Label>終了（単位：１時間）</Form.Label>
               <Form.Control
+                required
                 type="datetime-local"
                 min="2022-09-20T00:00"
                 max="2025-09-19T23:59"
                 step="3600"
-                required
+                onChange={(e): void => {
+                  setEnd(e.target.value);
+                }}
               />
             </Form.Group>
             <Button variant="primary" type="submit">
