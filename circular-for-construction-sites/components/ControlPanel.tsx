@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { db } from "../components/firebase";
-import { collection, collectionGroup, getDocs } from "firebase/firestore";
+import { collectionGroup, getDocs } from "firebase/firestore";
 import { useRouter } from "next/router";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
