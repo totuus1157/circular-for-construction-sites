@@ -5,7 +5,9 @@ import Stack from "react-bootstrap/Stack";
 import Card from "react-bootstrap/Card";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-function Articles(): JSX.Element {
+function Articles(props: { counter: number }): JSX.Element {
+  const { counter } = props;
+
   const mydata: JSX.Element[] = [];
   const [data, setData] = useState(mydata);
 
@@ -45,7 +47,7 @@ function Articles(): JSX.Element {
       });
       setData(mydata);
     });
-  }, []);
+  }, [counter]);
 
   return <Stack gap={1}>{data}</Stack>;
 }
