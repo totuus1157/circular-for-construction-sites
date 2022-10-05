@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { db } from "../components/firebase";
-import { collectionGroup, getDocs } from "firebase/firestore";
+import { collection, collectionGroup, getDocs } from "firebase/firestore";
 import { useRouter } from "next/router";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
@@ -75,13 +75,22 @@ function ControlPanel(props: Props): JSX.Element {
               </Accordion>
             </NavDropdown>
           </Nav>
-          <Button
-            variant="outline-light"
-            onClick={(): Promise<boolean> => router.push("/newsPosts")}
-          >
-            {brand === "回覧板" && "書き込み"}
-            {brand === "カレンダー" && "予定登録"}
-          </Button>
+          {brand === "回覧板" && (
+            <Button
+              variant="outline-light"
+              onClick={() => router.push("/newsPosts")}
+            >
+              書き込み
+            </Button>
+          )}
+          {brand === "カレンダー" && (
+            <Button
+              variant="outline-light"
+              onClick={() => router.push("/schedulePosts")}
+            >
+              予定登録
+            </Button>
+          )}
         </Navbar.Collapse>
       </Container>
     </Navbar>
