@@ -1,4 +1,4 @@
-import { useState, useEffect, SetStateAction } from "react";
+import { useState, useEffect } from "react";
 import { db } from "../components/firebase";
 import { collectionGroup, getDocs } from "firebase/firestore";
 import Stack from "react-bootstrap/Stack";
@@ -6,7 +6,7 @@ import Card from "react-bootstrap/Card";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function Articles(): JSX.Element {
-  const mydata: SetStateAction<any[]> = [];
+  const mydata: JSX.Element[] = [];
   const [data, setData] = useState(mydata);
 
   const areaName = (area: string): string => {
