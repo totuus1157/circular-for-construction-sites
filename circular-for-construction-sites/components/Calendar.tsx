@@ -15,6 +15,7 @@ function Calendar(props): JSX.Element {
       initialView="dayGridMonth" // 初期表示のモードを設定する
       events={"https://fullcalendar.io/api/demo-feeds/events.json"}
       allDaySlot={false}
+      slotDuration="01:00:00"
       aspectRatio={0.75}
       locales={[jaLocale]}
       locale="ja"
