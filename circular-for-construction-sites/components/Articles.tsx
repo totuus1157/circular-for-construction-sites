@@ -5,7 +5,7 @@ import Stack from "react-bootstrap/Stack";
 import Card from "react-bootstrap/Card";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-function Articles() {
+function Articles(): JSX.Element {
   const mydata: SetStateAction<any[]> = [];
   const [data, setData] = useState(mydata);
 
