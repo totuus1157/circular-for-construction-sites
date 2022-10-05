@@ -1,4 +1,4 @@
-import { useState, useEffect, SetStateAction } from "react";
+import { useState, useEffect } from "react";
 import { db } from "../components/firebase";
 import { collectionGroup, getDocs } from "firebase/firestore";
 import FullCalendar from "@fullcalendar/react";
@@ -7,7 +7,9 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import jaLocale from "@fullcalendar/core/locales/ja";
 
 function Calendar(props): JSX.Element {
-  const mydata: SetStateAction<any[]> = [];
+  type Mydata = { title: string; start: string; end: string };
+
+  const mydata: Mydata[] = [];
   const [data, setData] = useState(mydata);
 
   useEffect((): void => {
