@@ -21,7 +21,8 @@ function Articles(): JSX.Element {
   };
 
   useEffect((): void => {
-    getDocs(collectionGroup(db, "articles")).then((snapshot): void => {
+    const docRef = collectionGroup(db, "articles");
+    getDocs(docRef).then((snapshot): void => {
       snapshot.forEach((document): void => {
         const doc = document.data();
         mydata.push(
