@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Header from "../components/Header";
 import ControlPanel from "../components/ControlPanel";
-import UserDisplay from "../components/UserDisplay";
+import SecondLine from "../components/SecondLine";
 import Calendar from "../components/Calendar";
 import Footer from "../components/Footer";
 import { db, auth } from "../components/firebase";
@@ -18,12 +18,10 @@ function News(): JSX.Element {
     name: "",
     section: "",
   });
+  const [counter, setCounter] = useState(0);
   const router = useRouter();
 
-  console.log("user: ", user);
-  console.log("loading: ", loading);
-  console.log("error: ", error);
-  console.log("userInfo: ", userInfo);
+  console.log("counter: ", counter);
 
   const titleProp: string = "カレンダー";
 
@@ -64,13 +62,12 @@ function News(): JSX.Element {
       <>
         <Header title={titleProp} />
         <ControlPanel name={userInfo.name} brand={titleProp} />
-        <UserDisplay name={userInfo.name} />
-        <Calendar
-          userId={userInfo.email}
+        <SecondLine
+          counter={counter}
+          setCounter={setCounter}
           name={userInfo.name}
-          area={userInfo.area}
-          section={userInfo.section}
         />
+        <Calendar counter={counter} />
         <Footer />
       </>
     );

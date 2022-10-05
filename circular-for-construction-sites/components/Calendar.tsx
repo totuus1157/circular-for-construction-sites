@@ -6,7 +6,9 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import jaLocale from "@fullcalendar/core/locales/ja";
 
-function Calendar(props): JSX.Element {
+function Calendar(props: { counter: number }): JSX.Element {
+  const { counter } = props;
+
   type Mydata = { title: string; start: string; end: string };
 
   const mydata: Mydata[] = [];
@@ -21,7 +23,7 @@ function Calendar(props): JSX.Element {
       });
       setData(mydata);
     });
-  }, []);
+  }, [counter]);
 
   return (
     <FullCalendar
