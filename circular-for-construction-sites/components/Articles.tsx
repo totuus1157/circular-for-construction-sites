@@ -49,7 +49,19 @@ function Articles(props: { counter: number }): JSX.Element {
     });
   }, [counter]);
 
-  return <Stack gap={1}>{data}</Stack>;
+  return (
+    <>
+      {" "}
+      <style jsx>{`
+        div {
+          margin-bottom: 4rem;
+        }
+      `}</style>
+      <div>
+        <Stack gap={1}>{data}</Stack>
+      </div>
+    </>
+  );
 }
 
 export default Articles;
