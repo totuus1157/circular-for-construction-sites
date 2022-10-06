@@ -39,7 +39,7 @@ function News(): JSX.Element {
     if (user === null) {
       router.push("/");
     }
-  });
+  }, []);
 
   if (loading) {
     return (

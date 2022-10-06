@@ -25,6 +25,10 @@ function News(): JSX.Element {
 
   const titleProp: string = "カレンダー";
 
+  useEffect(() => {
+    location.reload();
+  }, []);
+
   useEffect((): void => {
     if (user !== null && user !== undefined) {
       const userId = user.email;
