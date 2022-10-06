@@ -19,13 +19,6 @@ const Addition: NextPage = (): JSX.Element => {
   const [user, loading, error] = useAuthState(auth);
   const router = useRouter();
 
-  /* console.log(name);
-   * console.log(area);
-   * console.log(section);
-   * console.log("user: ", user);
-   * console.log("loading: ", loading);
-   * console.log("error: ", error);
-   */
   useEffect((): void => {
     if (user === null) {
       router.push("/");
