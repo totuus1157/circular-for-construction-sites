@@ -25,8 +25,8 @@ function News(): JSX.Element {
 
   const titleProp: string = "カレンダー";
 
-  useEffect(() => {
-    location.reload();
+  useEffect((): void => {
+    setCounter(counter + 1);
   }, []);
 
   useEffect((): void => {
@@ -45,7 +45,7 @@ function News(): JSX.Element {
     if (user === null) {
       router.push("/");
     }
-  });
+  }, []);
 
   if (loading) {
     return (
