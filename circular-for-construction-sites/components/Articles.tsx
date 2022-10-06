@@ -28,7 +28,7 @@ function Articles(props: { counter: number }): JSX.Element {
       snapshot.forEach((document): void => {
         const doc = document.data();
         mydata.push(
-          <Card border="dark">
+          <Card className="small" border="dark">
             <Card.Body>
               <Card.Header className="text-muted">
                 From: {doc.name}（エリア{areaName(doc.from.area)}
