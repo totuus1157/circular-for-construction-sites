@@ -9,10 +9,10 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import Accordion from "react-bootstrap/Accordion";
 import Button from "react-bootstrap/Button";
 
-type Props = { name: string; brand: string };
+type Props = { brand: string };
 
 function ControlPanel(props: Props): JSX.Element {
-  const { name, brand } = props;
+  const { brand } = props;
 
   type From = { area: string; section: string };
 
@@ -20,8 +20,8 @@ function ControlPanel(props: Props): JSX.Element {
   const [fromArray, setFromArray] = useState<From[]>([]);
   const router = useRouter();
 
-  console.log("fromArray: ", fromArray);
-
+  /* console.log("fromArray: ", fromArray);
+   */
   useEffect((): void => {
     getDocs(collectionGroup(db, "articles")).then((snapshot): void => {
       snapshot.forEach((document): void => {
@@ -36,11 +36,11 @@ function ControlPanel(props: Props): JSX.Element {
     const hoge = [];
     hoge.push(
       fromArray.find((from: From) => {
-        console.log("from: ", from);
+        /* console.log("from: ", from); */
         return from === { area: "a", section: "civil" };
       })
     );
-    console.log("hoge: ", hoge);
+    /* console.log("hoge: ", hoge); */
   };
 
   areaDropdownItems(fromArray);
