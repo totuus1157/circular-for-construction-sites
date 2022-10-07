@@ -43,6 +43,7 @@ function Articles(props: Props): JSX.Element {
     getDocs(docRef).then((snapshot): void => {
       snapshot.forEach((document): void => {
         const doc = document.data();
+        console.log("doc: ", doc);
         mydata.push(
           <Card key={document.id} className="small" border="dark">
             <Card.Body>
@@ -62,6 +63,7 @@ function Articles(props: Props): JSX.Element {
                   userInfoName={userInfoName}
                   documentId={document.id}
                   contributorId={doc.email}
+                  confirmed={doc.confirmed}
                 />
               </Card.Footer>
             </Card.Body>
