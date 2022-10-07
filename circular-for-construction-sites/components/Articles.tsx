@@ -53,7 +53,7 @@ function Articles(props: Props): JSX.Element {
                 {sectionName(doc.from.section)}）{postDate(doc.timestamp)}
               </Card.Header>
               <Card.Text>{doc.article}</Card.Text>
-              <Card.Footer className="text-muted">
+              <Card.Footer className="text-muted d-flex justify-content-between">
                 To: エリア{areaName(doc.to.area)}
                 {"　"}
                 {sectionName(doc.to.section)}

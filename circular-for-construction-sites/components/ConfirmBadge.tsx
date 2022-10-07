@@ -58,7 +58,7 @@ function ConfirmBadge(props: Props) {
       <OverlayTrigger
         placement="bottom-start"
         overlay={
-          <Tooltip id="tooltip-right">
+          <Tooltip id="tooltip">
             {confirmed.map((obj) => {
               return `${obj.name}　`;
             })}
@@ -66,7 +66,7 @@ function ConfirmBadge(props: Props) {
         }
       >
         <Button variant="primary" size="sm">
-          既読者 <Badge bg="secondary">{confirmed.length}︎</Badge> ▶
+          ◀︎既読者 <Badge bg="secondary">{confirmed.length}︎</Badge> 
         </Button>
       </OverlayTrigger>
     );
