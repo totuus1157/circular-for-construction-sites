@@ -63,6 +63,8 @@ const NewsPosts: NextPage = (): JSX.Element => {
       from: { area: userInfo.area, section: userInfo.section },
       to: { area: area, section: section },
       name: userInfo.name,
+      email: userInfo.email,
+      confirmed: [],
       timestamp: serverTimestamp(),
     }).then((): void => {
       router.push("/news");

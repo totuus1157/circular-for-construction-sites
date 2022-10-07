@@ -59,13 +59,18 @@ function News(): JSX.Element {
     return (
       <>
         <Header title={titleProp} />
-        <ControlPanel name={userInfo.name} brand={titleProp} />
+        <ControlPanel brand={titleProp} />
         <SecondLine
           counter={counter}
           setCounter={setCounter}
           name={userInfo.name}
         />
-        <Articles counter={counter} />
+        <Articles
+          userInfoEmail={userInfo.email}
+          userInfoName={userInfo.name}
+          counter={counter}
+          setCounter={setCounter}
+        />
         <Footer />
       </>
     );

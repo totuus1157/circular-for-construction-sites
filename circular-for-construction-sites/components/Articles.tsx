@@ -1,15 +1,30 @@
 import { useState, useEffect } from "react";
+import ConfirmBadge from "../components/ConfirmBadge";
 import { db } from "../components/firebase";
 import { collectionGroup, getDocs } from "firebase/firestore";
 import Stack from "react-bootstrap/Stack";
 import Card from "react-bootstrap/Card";
-import "bootstrap/dist/css/bootstrap.min.css";
 
-function Articles(props: { counter: number }): JSX.Element {
-  const { counter } = props;
+type Props = {
+  userInfoEmail: string;
+  userInfoName: string;
+  counter: number;
+  setCounter: (arg0: number) => void;
+};
+
+function Articles(props: Props): JSX.Element {
+  const { userInfoEmail, userInfoName, counter, setCounter } = props;
 
   const mydata: JSX.Element[] = [];
   const [data, setData] = useState(mydata);
+
+  console.log("userInfoEmail: ", userInfoEmail);
+  console.log("userInfoName: ", userInfoName);
+
+  useEffect((): void => {
+    console.log("カウンター回すよ！");
+    setCounter(counter + 1);
+  }, [userInfoEmail, userInfoName]);
 
   const areaName = (area: string): string => {
     return area.toUpperCase();
@@ -23,23 +38,31 @@ function Articles(props: { counter: number }): JSX.Element {
   };
 
   useEffect((): void => {
+    console.log("Side Effect!");
     const docRef = collectionGroup(db, "articles");
     getDocs(docRef).then((snapshot): void => {
       snapshot.forEach((document): void => {
         const doc = document.data();
         mydata.push(
-          <Card className="small" border="dark">
+          <Card key={document.id} className="small" border="dark">
             <Card.Body>
               <Card.Header className="text-muted">
                 From: {doc.name}（エリア{areaName(doc.from.area)}
                 {"　"}
                 {sectionName(doc.from.section)}）{postDate(doc.timestamp)}
               </Card.Header>
-              <Card.Text key={document.id}>{doc.article}</Card.Text>
+              <Card.Text>{doc.article}</Card.Text>
               <Card.Footer className="text-muted">
                 To: エリア{areaName(doc.to.area)}
                 {"　"}
                 {sectionName(doc.to.section)}
+                {"　"}
+                <ConfirmBadge
+                  userInfoEmail={userInfoEmail}
+                  userInfoName={userInfoName}
+                  documentId={document.id}
+                  contributorId={doc.email}
+                />
               </Card.Footer>
             </Card.Body>
           </Card>
