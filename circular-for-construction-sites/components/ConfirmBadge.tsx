@@ -10,6 +10,7 @@ type Props = {
   contributorId: string;
   userInfoEmail: string;
   userInfoName: string;
+  canAdmin: boolean;
   confirmed: { id: string; name: string }[];
 };
 
@@ -19,11 +20,13 @@ function ConfirmBadge(props: Props) {
     contributorId,
     userInfoEmail,
     userInfoName,
+    canAdmin,
     confirmed,
   } = props;
 
-  console.log("userInfoName: ", userInfoName);
   console.log("userInfoEmail: ", userInfoEmail);
+  console.log("userInfoName: ", userInfoName);
+  console.log("canAdmin: ", canAdmin);
   console.log("confirmed: ", confirmed);
 
   const confirm = async (
@@ -43,17 +46,7 @@ function ConfirmBadge(props: Props) {
     }
   };
 
-  if (
-    confirmed.some((e): boolean => {
-      return e.id === userInfoEmail;
-    })
-  ) {
-    return (
-      <Button variant="primary" size="sm">
-        既読数 <Badge bg="secondary">{confirmed.length}</Badge>
-      </Button>
-    );
-  } else if (contributorId === userInfoEmail) {
+  if (contributorId === userInfoEmail || canAdmin === true) {
     return (
       <OverlayTrigger
         placement="bottom-start"
@@ -66,9 +59,19 @@ function ConfirmBadge(props: Props) {
         }
       >
         <Button variant="primary" size="sm">
-          ◀︎既読者 <Badge bg="secondary">{confirmed.length}︎</Badge> 
+          ◀︎既読者 <Badge bg="secondary">{confirmed.length}︎</Badge>
         </Button>
       </OverlayTrigger>
+    );
+  } else if (
+    confirmed.some((e): boolean => {
+      return e.id === userInfoEmail;
+    })
+  ) {
+    return (
+      <Button variant="primary" size="sm">
+        既読数 <Badge bg="secondary">{confirmed.length}</Badge>
+      </Button>
     );
   } else {
     return (

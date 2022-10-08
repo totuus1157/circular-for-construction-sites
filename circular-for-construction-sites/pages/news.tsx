@@ -77,7 +77,7 @@ function News(): JSX.Element {
         <Articles
           userInfoEmail={userInfo.email}
           userInfoName={userInfo.name}
-          canAdmin="{userInfo.admin}"
+          canAdmin={userInfo.admin}
           counter={counter}
           setCounter={setCounter}
         />

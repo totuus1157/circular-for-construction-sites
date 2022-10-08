@@ -8,21 +8,20 @@ import Card from "react-bootstrap/Card";
 type Props = {
   userInfoEmail: string;
   userInfoName: string;
+  canAdmin: boolean;
   counter: number;
   setCounter: (arg0: number) => void;
 };
 
 function Articles(props: Props): JSX.Element {
-  const { userInfoEmail, userInfoName, counter, setCounter } = props;
+  const { userInfoEmail, userInfoName, canAdmin, counter, setCounter } = props;
+
+  console.log("canAdmin: ", canAdmin);
 
   const mydata: JSX.Element[] = [];
   const [data, setData] = useState(mydata);
 
-  console.log("userInfoEmail: ", userInfoEmail);
-  console.log("userInfoName: ", userInfoName);
-
   useEffect((): void => {
-    console.log("カウンター回すよ！");
     setCounter(counter + 1);
   }, [userInfoEmail, userInfoName]);
 
@@ -38,12 +37,10 @@ function Articles(props: Props): JSX.Element {
   };
 
   useEffect((): void => {
-    console.log("Side Effect!");
     const docRef = collectionGroup(db, "articles");
     getDocs(docRef).then((snapshot): void => {
       snapshot.forEach((document): void => {
         const doc = document.data();
-        console.log("doc: ", doc);
         mydata.push(
           <Card key={document.id} className="small" border="dark">
             <Card.Body>
@@ -61,6 +58,7 @@ function Articles(props: Props): JSX.Element {
                 <ConfirmBadge
                   userInfoEmail={userInfoEmail}
                   userInfoName={userInfoName}
+                  canAdmin={canAdmin}
                   documentId={document.id}
                   contributorId={doc.email}
                   confirmed={doc.confirmed}
