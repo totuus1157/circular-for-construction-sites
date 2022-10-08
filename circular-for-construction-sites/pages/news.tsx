@@ -6,13 +6,22 @@ import SecondLine from "../components/SecondLine";
 import Articles from "../components/Articles";
 import Footer from "../components/Footer";
 import { db, auth } from "../components/firebase";
-import { doc, getDoc, DocumentData } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function News(): JSX.Element {
+  type UserInfo = {
+    admin: boolean;
+    area: string;
+    email: string;
+    name: string;
+    section: string;
+  };
+
   const [user, loading, error] = useAuthState(auth);
-  const [userInfo, setUserInfo] = useState<DocumentData>({
+  const [userInfo, setUserInfo] = useState<UserInfo>({
+    admin: false,
     area: "",
     email: "",
     name: "",
@@ -28,7 +37,7 @@ function News(): JSX.Element {
       const userId = user.email;
       if (userId !== null) {
         getDoc(doc(db, "users", userId)).then((snapshot): void => {
-          const document = snapshot.data();
+          const document = snapshot.data() as UserInfo;
           document && setUserInfo(document);
         });
       }
@@ -68,6 +77,7 @@ function News(): JSX.Element {
         <Articles
           userInfoEmail={userInfo.email}
           userInfoName={userInfo.name}
+          canAdmin="{userInfo.admin}"
           counter={counter}
           setCounter={setCounter}
         />
