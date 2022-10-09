@@ -35,6 +35,7 @@ const Addition: NextPage = (): JSX.Element => {
       area: area,
       section: section,
       email: user?.email,
+      admin: false,
     }).then((): void => {
       router.push("/news");
     });
