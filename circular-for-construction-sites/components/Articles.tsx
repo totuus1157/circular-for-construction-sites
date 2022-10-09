@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import ConfirmBadge from "../components/ConfirmBadge";
 import { db } from "../components/firebase";
-import { collectionGroup, getDocs } from "firebase/firestore";
+import { collectionGroup, getDocs, query, orderBy } from "firebase/firestore";
 import Stack from "react-bootstrap/Stack";
 import Card from "react-bootstrap/Card";
 
@@ -15,8 +15,6 @@ type Props = {
 
 function Articles(props: Props): JSX.Element {
   const { userInfoEmail, userInfoName, canAdmin, counter, setCounter } = props;
-
-  console.log("canAdmin: ", canAdmin);
 
   const mydata: JSX.Element[] = [];
   const [data, setData] = useState(mydata);
@@ -38,7 +36,8 @@ function Articles(props: Props): JSX.Element {
 
   useEffect((): void => {
     const docRef = collectionGroup(db, "articles");
-    getDocs(docRef).then((snapshot): void => {
+    const q = query(docRef, orderBy("timestamp", "desc"));
+    getDocs(q).then((snapshot): void => {
       snapshot.forEach((document): void => {
         const doc = document.data();
         mydata.push(
