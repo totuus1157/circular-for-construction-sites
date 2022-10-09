@@ -15,6 +15,11 @@ function Footer(): JSX.Element {
           <Button>カレンダー</Button>
         </a>
       </Link>
+      <Link href="/archives">
+        <a>
+          <Button>アーカイブ</Button>
+        </a>
+      </Link>
     </Navbar>
   );
 }
