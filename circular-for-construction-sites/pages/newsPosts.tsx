@@ -18,6 +18,7 @@ import styles from "../styles/Home.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const NewsPosts: NextPage = (): JSX.Element => {
+  const [title, setTitle] = useState("");
   const [article, setArticle] = useState("");
   const [area, setArea] = useState("");
   const [section, setSection] = useState("");
@@ -59,6 +60,7 @@ const NewsPosts: NextPage = (): JSX.Element => {
     event.preventDefault();
     const docRef = collection(db, "users", userInfo.email, "articles");
     await addDoc(docRef, {
+      title: title,
       article: article,
       from: { area: userInfo.area, section: userInfo.section },
       to: { area: area, section: section },
@@ -100,6 +102,15 @@ const NewsPosts: NextPage = (): JSX.Element => {
           <h1 className={styles.title}>新規投稿</h1>
 
           <Form onSubmit={handleSubmit}>
+            <Form.Group className="mb-3" controlId="formBasicTextInput">
+              <Form.Label>タイトル</Form.Label>
+              <Form.Control
+                required
+                onChange={(e): void => {
+                  setTitle(e.target.value);
+                }}
+              />
+            </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicTextarea">
               <Form.Label>内容</Form.Label>
               <Form.Control
