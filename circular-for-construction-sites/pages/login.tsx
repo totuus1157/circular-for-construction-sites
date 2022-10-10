@@ -80,6 +80,12 @@ const SignIn: NextPage = (): JSX.Element => {
           <Button variant="primary" type="submit">
             ログイン
           </Button>
+          <Button
+            variant="secondary"
+            onClick={(): Promise<boolean> => router.push("/")}
+          >
+            キャンセル
+          </Button>
         </Form>
       </main>
     </div>
