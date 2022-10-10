@@ -1,5 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, SetStateAction } from "react";
+import ArchiveButton from "../components/ArchiveButton";
 import ConfirmBadge from "../components/ConfirmBadge";
+import ArticleModal from "../components/ArticleModal";
 import { db } from "../components/firebase";
 import { collectionGroup, getDocs, query, orderBy } from "firebase/firestore";
 import Stack from "react-bootstrap/Stack";
@@ -16,8 +18,14 @@ type Props = {
 function Articles(props: Props): JSX.Element {
   const { userInfoEmail, userInfoName, canAdmin, counter, setCounter } = props;
 
-  const mydata: JSX.Element[] = [];
-  const [data, setData] = useState(mydata);
+  type ContentData = { docId: string; title: string; article: string };
+
+  const contentArray: ContentData[] = [];
+  const cardArray: JSX.Element[] = [];
+  const [contentData, setContentData] = useState(contentArray);
+  const [cardData, setCardData] = useState(cardArray);
+  const [selectedID, setSelectedID] = useState("");
+  const [show, setShow] = useState(false);
 
   useEffect((): void => {
     setCounter(counter + 1);
@@ -34,22 +42,44 @@ function Articles(props: Props): JSX.Element {
     return `${date.getMonth() + 1}月${date.getDate()}日`;
   };
 
+  const targetArticle = contentData.find((article): boolean => {
+    return article.docId === selectedID;
+  });
+
+  const openModal = (docId: SetStateAction<string>): void => {
+    setSelectedID(docId);
+    setShow(true);
+  };
+
   useEffect((): void => {
     const docRef = collectionGroup(db, "articles");
     const q = query(docRef, orderBy("timestamp", "desc"));
     getDocs(q).then((snapshot): void => {
       snapshot.forEach((document): void => {
         const doc = document.data();
-        mydata.push(
-          <Card key={document.id} className="small" border="dark">
+        contentArray.push({
+          docId: document.id,
+          title: doc.title,
+          article: doc.article,
+        });
+        cardArray.push(
+          <Card
+            key={document.id}
+            border="dark"
+            onClick={(): void => openModal(document.id)}
+            style={{ cursor: "pointer" }}
+          >
             <Card.Body>
-              <Card.Header className="text-muted">
+              <Card.Text className="small text-muted d-flex justify-content-between">
                 From: {doc.name}（エリア{areaName(doc.from.area)}
                 {"　"}
                 {sectionName(doc.from.section)}）{postDate(doc.timestamp)}
-              </Card.Header>
-              <Card.Text>{doc.article}</Card.Text>
-              <Card.Footer className="text-muted d-flex justify-content-between">
+              </Card.Text>
+              <Card.Text className="d-flex justify-content-between">
+                <strong>{doc.title}</strong>
+                <ArchiveButton />
+              </Card.Text>
+              <Card.Text className="small text-muted d-flex justify-content-between">
                 To: エリア{areaName(doc.to.area)}
                 {"　"}
                 {sectionName(doc.to.section)}
@@ -62,25 +92,32 @@ function Articles(props: Props): JSX.Element {
                   contributorId={doc.email}
                   confirmed={doc.confirmed}
                 />
-              </Card.Footer>
+              </Card.Text>
             </Card.Body>
           </Card>
         );
       });
-      setData(mydata);
+      setContentData(contentArray);
+      setCardData(cardArray);
     });
   }, [counter]);
 
   return (
     <>
-      {" "}
       <style jsx>{`
         div {
           margin-bottom: 4rem;
         }
       `}</style>
+
       <div>
-        <Stack gap={1}>{data}</Stack>
+        <Stack gap={1}>{cardData}</Stack>
+        <ArticleModal
+          show={show}
+          setShow={setShow}
+          title={targetArticle?.title}
+          article={targetArticle?.article}
+        />
       </div>
     </>
   );
