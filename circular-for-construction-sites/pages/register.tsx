@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import Header from "../components/Header";
-import { auth } from '../components/firebase'
+import { auth } from "../components/firebase";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -80,6 +80,9 @@ const Register: NextPage = (): JSX.Element => {
           </Form.Group>
           <Button variant="primary" type="submit">
             登録
+          </Button>
+          <Button variant="secondary" onClick={() => router.push("/")}>
+            キャンセル
           </Button>
         </Form>
       </main>
