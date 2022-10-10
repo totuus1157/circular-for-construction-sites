@@ -1,5 +1,4 @@
 import { useState, useEffect, SetStateAction } from "react";
-import ArchiveButton from "../components/ArchiveButton";
 import ConfirmBadge from "../components/ConfirmBadge";
 import ArticleModal from "../components/ArticleModal";
 import { db } from "../components/firebase";
@@ -58,7 +57,7 @@ function Archives(props: Props): JSX.Element {
     getDocs(q).then((snapshot): void => {
       snapshot.forEach((document): void => {
         const doc = document.data();
-        if (doc.archive === false) {
+        if (doc.archive === true) {
           contentArray.push({
             docId: document.id,
             title: doc.title,
@@ -79,12 +78,6 @@ function Archives(props: Props): JSX.Element {
                   >
                     <strong>{doc.title}</strong>
                   </Button>
-                  {(doc.email === userInfoEmail || canAdmin === true) && (
-                    <ArchiveButton
-                      documentId={document.id}
-                      contributorId={doc.email}
-                    />
-                  )}
                 </Card.Text>
                 <Card.Text className="small text-muted d-flex justify-content-between">
                   To: エリア{areaName(doc.to.area)}
