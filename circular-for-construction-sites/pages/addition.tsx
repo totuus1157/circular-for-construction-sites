@@ -112,6 +112,12 @@ const Addition: NextPage = (): JSX.Element => {
             <Button variant="primary" type="submit">
               登録
             </Button>
+            <Button
+              variant="secondary"
+              onClick={(): Promise<boolean> => router.push("/")}
+            >
+              キャンセル
+            </Button>
           </Form>
         </main>
       </div>
