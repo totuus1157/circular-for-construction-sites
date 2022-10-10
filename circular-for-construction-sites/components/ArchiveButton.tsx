@@ -2,10 +2,15 @@ import Button from "react-bootstrap/Button";
 import { db } from "../components/firebase";
 import { doc, updateDoc } from "firebase/firestore";
 
-type Props = { documentId: string; contributorId: string };
+type Props = {
+  documentId: string;
+  contributorId: string;
+  counter: number;
+  setCounter: (arg0: number) => void;
+};
 
 function ArchiveButton(props: Props): JSX.Element {
-  const { documentId, contributorId } = props;
+  const { documentId, contributorId, counter, setCounter } = props;
 
   console.log("documentId: ", documentId);
 
@@ -13,7 +18,8 @@ function ArchiveButton(props: Props): JSX.Element {
     const docRef = doc(db, "users", contributorId, "articles", docId);
     await updateDoc(docRef, { archive: true })
       .then((): void => {
-        console.log("アーカイブできた！");
+        alert("記事をアーカイブしました");
+        setCounter(counter + 1);
       })
       .catch((err): void => {
         console.log("err: ", err);

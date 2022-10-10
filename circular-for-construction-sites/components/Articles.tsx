@@ -83,6 +83,8 @@ function Articles(props: Props): JSX.Element {
                     <ArchiveButton
                       documentId={document.id}
                       contributorId={doc.email}
+                      counter={counter}
+                      setCounter={setCounter}
                     />
                   )}
                 </Card.Text>
