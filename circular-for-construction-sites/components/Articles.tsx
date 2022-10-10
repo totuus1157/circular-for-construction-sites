@@ -71,13 +71,17 @@ function Articles(props: Props): JSX.Element {
                 {"　"}
                 {sectionName(doc.from.section)}）{postDate(doc.timestamp)}
               </Card.Text>
-              <Card.Text
-                className="d-flex justify-content-between"
-              >
-                <Button variant="link" onClick={(): void => openModal(document.id)}>
+              <Card.Text className="d-flex justify-content-between">
+                <Button
+                  variant="link"
+                  onClick={(): void => openModal(document.id)}
+                >
                   <strong>{doc.title}</strong>
                 </Button>
-                <ArchiveButton />
+                <ArchiveButton
+                  documentId={document.id}
+                  contributorId={doc.email}
+                />
               </Card.Text>
               <Card.Text className="small text-muted d-flex justify-content-between">
                 To: エリア{areaName(doc.to.area)}
