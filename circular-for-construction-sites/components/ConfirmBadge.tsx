@@ -24,11 +24,6 @@ function ConfirmBadge(props: Props) {
     confirmed,
   } = props;
 
-  console.log("userInfoEmail: ", userInfoEmail);
-  console.log("userInfoName: ", userInfoName);
-  console.log("canAdmin: ", canAdmin);
-  console.log("confirmed: ", confirmed);
-
   const confirm = async (
     documentId: string,
     contributorId: string
