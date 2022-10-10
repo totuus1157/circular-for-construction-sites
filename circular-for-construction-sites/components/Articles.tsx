@@ -6,6 +6,7 @@ import { db } from "../components/firebase";
 import { collectionGroup, getDocs, query, orderBy } from "firebase/firestore";
 import Stack from "react-bootstrap/Stack";
 import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
 
 type Props = {
   userInfoEmail: string;
@@ -63,20 +64,19 @@ function Articles(props: Props): JSX.Element {
           article: doc.article,
         });
         cardArray.push(
-          <Card
-            key={document.id}
-            border="dark"
-            onClick={(): void => openModal(document.id)}
-            style={{ cursor: "pointer" }}
-          >
+          <Card key={document.id} border="dark">
             <Card.Body>
               <Card.Text className="small text-muted d-flex justify-content-between">
                 From: {doc.name}（エリア{areaName(doc.from.area)}
                 {"　"}
                 {sectionName(doc.from.section)}）{postDate(doc.timestamp)}
               </Card.Text>
-              <Card.Text className="d-flex justify-content-between">
-                <strong>{doc.title}</strong>
+              <Card.Text
+                className="d-flex justify-content-between"
+              >
+                <Button variant="link" onClick={(): void => openModal(document.id)}>
+                  <strong>{doc.title}</strong>
+                </Button>
                 <ArchiveButton />
               </Card.Text>
               <Card.Text className="small text-muted d-flex justify-content-between">
