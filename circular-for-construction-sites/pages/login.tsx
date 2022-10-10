@@ -77,15 +77,17 @@ const SignIn: NextPage = (): JSX.Element => {
               placeholder="8〜32文字の英数字"
             />
           </Form.Group>
-          <Button variant="primary" type="submit">
-            ログイン
-          </Button>
-          <Button
-            variant="secondary"
-            onClick={(): Promise<boolean> => router.push("/")}
-          >
-            キャンセル
-          </Button>
+          <div className="d-flex justify-content-around">
+            <Button variant="primary" type="submit">
+              ログイン
+            </Button>
+            <Button
+              variant="secondary"
+              onClick={(): Promise<boolean> => router.push("/")}
+            >
+              キャンセル
+            </Button>
+          </div>
         </Form>
       </main>
     </div>

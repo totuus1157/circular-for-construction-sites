@@ -150,15 +150,17 @@ const NewsPosts: NextPage = (): JSX.Element => {
                 <option value="erectrical">Erectrical</option>
               </Form.Select>
             </Form.Group>
-            <Button variant="primary" type="submit">
-              書き込む
-            </Button>{" "}
-            <Button
-              variant="secondary"
-              onClick={(): Promise<boolean> => router.push("/news")}
-            >
-              キャンセル
-            </Button>
+            <div className="d-flex justify-content-around">
+              <Button variant="primary" type="submit">
+                書き込む
+              </Button>
+              <Button
+                variant="secondary"
+                onClick={(): Promise<boolean> => router.push("/news")}
+              >
+                キャンセル
+              </Button>
+            </div>
           </Form>
         </main>
       </div>

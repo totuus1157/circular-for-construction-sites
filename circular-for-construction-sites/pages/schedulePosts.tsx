@@ -136,15 +136,17 @@ const SchedulePosts: NextPage = (): JSX.Element => {
                 }}
               />
             </Form.Group>
-            <Button variant="primary" type="submit">
-              書き込む
-            </Button>{" "}
-            <Button
-              variant="secondary"
-              onClick={(): Promise<boolean> => router.push("/calendar")}
-            >
-              キャンセル
-            </Button>
+            <div className="d-flex justify-content-around">
+              <Button variant="primary" type="submit">
+                書き込む
+              </Button>
+              <Button
+                variant="secondary"
+                onClick={(): Promise<boolean> => router.push("/calendar")}
+              >
+                キャンセル
+              </Button>
+            </div>
           </Form>
         </main>
       </div>
