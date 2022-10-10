@@ -20,9 +20,7 @@ function ArticleModal(props: Props): JSX.Element {
       </Modal.Header>
       <Modal.Body>{article}</Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={handleClose}>
-          Close
-        </Button>
+        <Button variant="secondary" onClick={handleClose}>閉じる</Button>
       </Modal.Footer>
     </Modal>
   );
