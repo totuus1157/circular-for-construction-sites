@@ -58,48 +58,52 @@ function Articles(props: Props): JSX.Element {
     getDocs(q).then((snapshot): void => {
       snapshot.forEach((document): void => {
         const doc = document.data();
-        contentArray.push({
-          docId: document.id,
-          title: doc.title,
-          article: doc.article,
-        });
-        cardArray.push(
-          <Card key={document.id} border="dark">
-            <Card.Body>
-              <Card.Text className="small text-muted d-flex justify-content-between">
-                From: {doc.name}（エリア{areaName(doc.from.area)}
-                {"　"}
-                {sectionName(doc.from.section)}）{postDate(doc.timestamp)}
-              </Card.Text>
-              <Card.Text className="d-flex justify-content-between">
-                <Button
-                  variant="link"
-                  onClick={(): void => openModal(document.id)}
-                >
-                  <strong>{doc.title}</strong>
-                </Button>
-                <ArchiveButton
-                  documentId={document.id}
-                  contributorId={doc.email}
-                />
-              </Card.Text>
-              <Card.Text className="small text-muted d-flex justify-content-between">
-                To: エリア{areaName(doc.to.area)}
-                {"　"}
-                {sectionName(doc.to.section)}
-                {"　"}
-                <ConfirmBadge
-                  userInfoEmail={userInfoEmail}
-                  userInfoName={userInfoName}
-                  canAdmin={canAdmin}
-                  documentId={document.id}
-                  contributorId={doc.email}
-                  confirmed={doc.confirmed}
-                />
-              </Card.Text>
-            </Card.Body>
-          </Card>
-        );
+        if (doc.archive === false) {
+          contentArray.push({
+            docId: document.id,
+            title: doc.title,
+            article: doc.article,
+          });
+          cardArray.push(
+            <Card key={document.id} border="dark">
+              <Card.Body>
+                <Card.Text className="small text-muted d-flex justify-content-between">
+                  From: {doc.name}（エリア{areaName(doc.from.area)}
+                  {"　"}
+                  {sectionName(doc.from.section)}）{postDate(doc.timestamp)}
+                </Card.Text>
+                <Card.Text className="d-flex justify-content-between">
+                  <Button
+                    variant="link"
+                    onClick={(): void => openModal(document.id)}
+                  >
+                    <strong>{doc.title}</strong>
+                  </Button>
+                  {(doc.email === userInfoEmail || canAdmin === true) && (
+                    <ArchiveButton
+                      documentId={document.id}
+                      contributorId={doc.email}
+                    />
+                  )}
+                </Card.Text>
+                <Card.Text className="small text-muted d-flex justify-content-between">
+                  To: エリア{areaName(doc.to.area)}
+                  {"　"}
+                  {sectionName(doc.to.section)}
+                  {"　"}
+                  <ConfirmBadge
+                    userInfoEmail={userInfoEmail}
+                    userInfoName={userInfoName}
+                    canAdmin={canAdmin}
+                    documentId={document.id}
+                    contributorId={doc.email}
+                    confirmed={doc.confirmed}
+                  />
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          );
+        }
       });
       setContentData(contentArray);
       setCardData(cardArray);
