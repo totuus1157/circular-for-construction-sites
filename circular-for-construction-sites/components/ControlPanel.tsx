@@ -78,7 +78,7 @@ function ControlPanel(props: Props): JSX.Element {
           {brand === "回覧板" && (
             <Button
               variant="outline-light"
-              onClick={() => router.push("/newsPosts")}
+              onClick={(): Promise<boolean> => router.push("/newsPosts")}
             >
               書き込み
             </Button>
@@ -86,7 +86,7 @@ function ControlPanel(props: Props): JSX.Element {
           {brand === "カレンダー" && (
             <Button
               variant="outline-light"
-              onClick={() => router.push("/schedulePosts")}
+              onClick={(): Promise<boolean> => router.push("/schedulePosts")}
             >
               予定登録
             </Button>
