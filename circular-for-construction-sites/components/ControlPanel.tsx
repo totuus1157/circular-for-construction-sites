@@ -14,36 +14,55 @@ type Props = { brand: string };
 function ControlPanel(props: Props): JSX.Element {
   const { brand } = props;
 
-  type From = { area: string; section: string };
+  type AreaAndSection = { area: string; section: string };
 
-  const fromData: From[] = [];
-  const [fromArray, setFromArray] = useState<From[]>([]);
+  const areaAndSectionData: AreaAndSection[] = [];
+  const [areaAndSectionArray, setAreaAndSectionArray] = useState<
+    AreaAndSection[]
+  >([]);
   const router = useRouter();
 
-  /* console.log("fromArray: ", fromArray);
-   */
   useEffect((): void => {
     getDocs(collectionGroup(db, "articles")).then((snapshot): void => {
       snapshot.forEach((document): void => {
         const doc = document.data();
-        fromData.push(doc.from);
+        if (brand === "回覧板" || brand === "アーカイブ")
+          areaAndSectionData.push(doc.to);
+        if (brand === "カレンダー") areaAndSectionData.push(doc.from);
       });
-      setFromArray(fromData);
+      setAreaAndSectionArray(areaAndSectionData);
     });
   }, []);
 
-  const areaDropdownItems = (fromArray: From[]) => {
-    const hoge = [];
-    hoge.push(
-      fromArray.find((from: From) => {
-        /* console.log("from: ", from); */
-        return from === { area: "a", section: "civil" };
-      })
-    );
-    /* console.log("hoge: ", hoge); */
-  };
+  const areaArray = ["a", "b", "c"];
+  const sectionArray = [
+    "civil",
+    "building",
+    "mechanical",
+    "piping",
+    "erectrical",
+  ];
+  const sortedAreaAndSection: AreaAndSection[] = [];
 
-  areaDropdownItems(fromArray);
+  areaArray.forEach((area): void => {
+    sectionArray.forEach((section): void => {
+      areaAndSectionArray.forEach((obj): void => {
+        if (area === obj.area && section === obj.section)
+          sortedAreaAndSection.push(obj);
+      });
+    });
+  });
+
+  const uniqueAreaAndSection = sortedAreaAndSection.filter(
+    (element, index, self): boolean => {
+      return (
+        index ===
+        self.findIndex((e): boolean => {
+          return e.area === element.area && e.section === element.section;
+        })
+      );
+    }
+  );
 
   return (
     <Navbar bg="dark" variant="dark" sticky="top">
@@ -57,12 +76,12 @@ function ControlPanel(props: Props): JSX.Element {
               alert(`selected ${selectedKey}`);
             }}
           >
-            <NavDropdown title="エリア" id="basic-nav-dropdown1">
+            <NavDropdown title="エリア選択" id="basic-nav-dropdown1">
               <Accordion>
                 <Accordion.Item eventKey="0">
                   <Accordion.Header>A</Accordion.Header>
                   <Accordion.Body>
-                    <NavDropdown.Item>Civil</NavDropdown.Item>
+                    <NavDropdown.Item eventKey="4.1">Civil</NavDropdown.Item>
                     <NavDropdown.Item>Building</NavDropdown.Item>
                   </Accordion.Body>
                 </Accordion.Item>
