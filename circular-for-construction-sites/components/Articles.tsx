@@ -9,6 +9,8 @@ import {
   query,
   where,
   orderBy,
+  doc,
+  deleteDoc,
 } from "firebase/firestore";
 import Stack from "react-bootstrap/Stack";
 import Card from "react-bootstrap/Card";
@@ -69,6 +71,17 @@ function Articles(props: Props): JSX.Element {
     setShow(true);
   };
 
+  const doDelete = async (docId: string): Promise<void> => {
+    confirm("この投稿を削除しますか？") &&
+      (await deleteDoc(doc(db, "users", userInfoEmail, "articles", docId))
+        .then((): void => {
+          setCounter(counter + 1);
+        })
+        .catch((err): void => {
+          console.log("err: ", err);
+        }));
+  };
+
   useEffect((): void => {
     const docRef = collectionGroup(db, "articles");
     let q = query(docRef, orderBy("timestamp", "desc"));
@@ -107,14 +120,24 @@ function Articles(props: Props): JSX.Element {
                   >
                     <strong>{doc.title}</strong>
                   </Button>
-                  {(doc.email === userInfoEmail || canAdmin === true) && (
-                    <ArchiveButton
-                      documentId={document.id}
-                      contributorId={doc.email}
-                      counter={counter}
-                      setCounter={setCounter}
-                    />
-                  )}
+                  <div>
+                    {(doc.email === userInfoEmail || canAdmin === true) && (
+                      <ArchiveButton
+                        documentId={document.id}
+                        contributorId={doc.email}
+                        counter={counter}
+                        setCounter={setCounter}
+                      />
+                    )}{" "}
+                    {doc.email === userInfoEmail && (
+                      <Button
+                        size="sm"
+                        onClick={(): Promise<void> => doDelete(document.id)}
+                      >
+                        さ
+                      </Button>
+                    )}
+                  </div>
                 </Card.Text>
                 <Card.Text className="small text-muted d-flex justify-content-between">
                   To: エリア{areaName(doc.to.area)}
