@@ -12,8 +12,6 @@ type Props = {
 function ArchiveButton(props: Props): JSX.Element {
   const { documentId, contributorId, counter, setCounter } = props;
 
-  console.log("documentId: ", documentId);
-
   const archive = async (docId: string): Promise<void> => {
     const docRef = doc(db, "users", contributorId, "articles", docId);
     await updateDoc(docRef, { archive: true })
