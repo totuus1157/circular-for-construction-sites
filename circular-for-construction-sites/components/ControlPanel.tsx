@@ -9,10 +9,13 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import Accordion from "react-bootstrap/Accordion";
 import Button from "react-bootstrap/Button";
 
-type Props = { brand: string };
+type Props = {
+  brand: string;
+  setSelectedAreaAndSection: (arg0: string) => void;
+};
 
 function ControlPanel(props: Props): JSX.Element {
-  const { brand } = props;
+  const { brand, setSelectedAreaAndSection } = props;
 
   type AreaAndSection = { area: string; section: string };
 
@@ -72,23 +75,132 @@ function ControlPanel(props: Props): JSX.Element {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav
             className="me-auto"
-            onSelect={(selectedKey) => {
-              alert(`selected ${selectedKey}`);
+            onSelect={(selectedKey): void => {
+              selectedKey && setSelectedAreaAndSection(selectedKey);
             }}
           >
             <NavDropdown title="エリア選択" id="basic-nav-dropdown1">
+              <NavDropdown.Item eventKey="all">すべて</NavDropdown.Item>
+              <NavDropdown.Divider />
               <Accordion>
                 <Accordion.Item eventKey="0">
                   <Accordion.Header>A</Accordion.Header>
                   <Accordion.Body>
-                    <NavDropdown.Item eventKey="4.1">Civil</NavDropdown.Item>
-                    <NavDropdown.Item>Building</NavDropdown.Item>
+                    {uniqueAreaAndSection.some(
+                      (obj) => obj.area === "a" && obj.section === "civil"
+                    ) && (
+                      <NavDropdown.Item eventKey="a,civil">
+                        Civil
+                      </NavDropdown.Item>
+                    )}
+                    {uniqueAreaAndSection.some(
+                      (obj) => obj.area === "a" && obj.section === "building"
+                    ) && (
+                      <NavDropdown.Item eventKey="a,building">
+                        Building
+                      </NavDropdown.Item>
+                    )}
+                    {uniqueAreaAndSection.some(
+                      (obj) => obj.area === "a" && obj.section === "mechanical"
+                    ) && (
+                      <NavDropdown.Item eventKey="a,mechanical">
+                        Mechanical
+                      </NavDropdown.Item>
+                    )}
+                    {uniqueAreaAndSection.some(
+                      (obj) => obj.area === "a" && obj.section === "piping"
+                    ) && (
+                      <NavDropdown.Item eventKey="a,piping">
+                        Piping
+                      </NavDropdown.Item>
+                    )}
+                    {uniqueAreaAndSection.some(
+                      (obj) => obj.area === "a" && obj.section === "erectrical"
+                    ) && (
+                      <NavDropdown.Item eventKey="a,erectrical">
+                        Erectrical
+                      </NavDropdown.Item>
+                    )}
                   </Accordion.Body>
                 </Accordion.Item>
                 <Accordion.Item eventKey="1">
                   <Accordion.Header>B</Accordion.Header>
                   <Accordion.Body>
-                    <NavDropdown.Item>Civil</NavDropdown.Item>
+                    {uniqueAreaAndSection.some(
+                      (obj) => obj.area === "b" && obj.section === "civil"
+                    ) && (
+                      <NavDropdown.Item eventKey="b,civil">
+                        Civil
+                      </NavDropdown.Item>
+                    )}
+                    {uniqueAreaAndSection.some(
+                      (obj) => obj.area === "b" && obj.section === "building"
+                    ) && (
+                      <NavDropdown.Item eventKey="b,building">
+                        Building
+                      </NavDropdown.Item>
+                    )}
+                    {uniqueAreaAndSection.some(
+                      (obj) => obj.area === "b" && obj.section === "mechanical"
+                    ) && (
+                      <NavDropdown.Item eventKey="b,mechanical">
+                        Mechanical
+                      </NavDropdown.Item>
+                    )}
+                    {uniqueAreaAndSection.some(
+                      (obj) => obj.area === "b" && obj.section === "piping"
+                    ) && (
+                      <NavDropdown.Item eventKey="b,piping">
+                        Piping
+                      </NavDropdown.Item>
+                    )}
+                    {uniqueAreaAndSection.some(
+                      (obj) => obj.area === "b" && obj.section === "erectrical"
+                    ) && (
+                      <NavDropdown.Item eventKey="b,erectrical">
+                        Erectrical
+                      </NavDropdown.Item>
+                    )}
+                  </Accordion.Body>
+                </Accordion.Item>
+                <Accordion.Item eventKey="2">
+                  <Accordion.Header>C</Accordion.Header>
+                  <Accordion.Body>
+                    {uniqueAreaAndSection.some(
+                      (obj) => obj.area === "c" && obj.section === "civil"
+                    ) && (
+                      <NavDropdown.Item eventKey="c,civil">
+                        Civil
+                      </NavDropdown.Item>
+                    )}
+                    {uniqueAreaAndSection.some(
+                      (obj) => obj.area === "c" && obj.section === "building"
+                    ) && (
+                      <NavDropdown.Item eventKey="c,building">
+                        Building
+                      </NavDropdown.Item>
+                    )}
+                    {uniqueAreaAndSection.some(
+                      (obj) => obj.area === "c" && obj.section === "mechanical"
+                    ) && (
+                      <NavDropdown.Item eventKey="c,mechanical">
+                        Mechanical
+                      </NavDropdown.Item>
+                    )}
+                    {uniqueAreaAndSection.some(
+                      (obj) => obj.area === "c" && obj.section === "piping"
+                    ) && (
+                      <NavDropdown.Item eventKey="c,piping">
+                        Piping
+                      </NavDropdown.Item>
+                    )}
+                    {uniqueAreaAndSection.some(
+                      (obj) => obj.area === "c" && obj.section === "erectrical"
+                    ) && (
+                      <NavDropdown.Item eventKey="c,erectrical">
+                        Erectrical
+                      </NavDropdown.Item>
+                    )}
                   </Accordion.Body>
                 </Accordion.Item>
               </Accordion>

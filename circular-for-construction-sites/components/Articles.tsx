@@ -3,7 +3,13 @@ import ArchiveButton from "../components/ArchiveButton";
 import ConfirmBadge from "../components/ConfirmBadge";
 import ArticleModal from "../components/ArticleModal";
 import { db } from "../components/firebase";
-import { collectionGroup, getDocs, query, orderBy } from "firebase/firestore";
+import {
+  collectionGroup,
+  getDocs,
+  query,
+  where,
+  orderBy,
+} from "firebase/firestore";
 import Stack from "react-bootstrap/Stack";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
@@ -12,12 +18,20 @@ type Props = {
   userInfoEmail: string;
   userInfoName: string;
   canAdmin: boolean;
+  selectedAreaAndSection: string;
   counter: number;
   setCounter: (arg0: number) => void;
 };
 
 function Articles(props: Props): JSX.Element {
-  const { userInfoEmail, userInfoName, canAdmin, counter, setCounter } = props;
+  const {
+    userInfoEmail,
+    userInfoName,
+    canAdmin,
+    selectedAreaAndSection,
+    counter,
+    setCounter,
+  } = props;
 
   type ContentData = { docId: string; title: string; article: string };
 
@@ -31,6 +45,9 @@ function Articles(props: Props): JSX.Element {
   useEffect((): void => {
     setCounter(counter + 1);
   }, [userInfoEmail, userInfoName]);
+
+  const separatedData =
+    selectedAreaAndSection !== "all" ? selectedAreaAndSection.split(",") : null;
 
   const areaName = (area: string): string => {
     return area.toUpperCase();
@@ -54,7 +71,14 @@ function Articles(props: Props): JSX.Element {
 
   useEffect((): void => {
     const docRef = collectionGroup(db, "articles");
-    const q = query(docRef, orderBy("timestamp", "desc"));
+    let q = query(docRef, orderBy("timestamp", "desc"));
+    if (separatedData !== null && (separatedData[0] !== undefined && separatedData[1] !== undefined))
+      q = query(
+        docRef,
+        orderBy("timestamp", "desc"),
+        where("to.area", "==", separatedData[0]),
+        where("to.section", "==", separatedData[1])
+      );
     getDocs(q).then((snapshot): void => {
       snapshot.forEach((document): void => {
         const doc = document.data();
@@ -112,7 +136,7 @@ function Articles(props: Props): JSX.Element {
       setContentData(contentArray);
       setCardData(cardArray);
     });
-  }, [counter]);
+  }, [counter, selectedAreaAndSection]);
 
   return (
     <>

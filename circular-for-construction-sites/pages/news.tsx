@@ -27,6 +27,7 @@ function News(): JSX.Element {
     name: "",
     section: "",
   });
+  const [selectedAreaAndSection, setSelectedAreaAndSection] = useState("");
   const [counter, setCounter] = useState(0);
   const router = useRouter();
 
@@ -68,7 +69,10 @@ function News(): JSX.Element {
     return (
       <>
         <Header title={titleProp} />
-        <ControlPanel brand={titleProp} />
+        <ControlPanel
+          brand={titleProp}
+          setSelectedAreaAndSection={setSelectedAreaAndSection}
+        />
         <SecondLine
           counter={counter}
           setCounter={setCounter}
@@ -78,6 +82,7 @@ function News(): JSX.Element {
           userInfoEmail={userInfo.email}
           userInfoName={userInfo.name}
           canAdmin={userInfo.admin}
+          selectedAreaAndSection={selectedAreaAndSection}
           counter={counter}
           setCounter={setCounter}
         />
