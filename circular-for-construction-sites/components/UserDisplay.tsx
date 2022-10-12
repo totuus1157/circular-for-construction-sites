@@ -16,7 +16,7 @@ function UserDisplay(props: { name: string | null }): JSX.Element {
   return (
     <p>
       ログイン中：{" "}
-      <a href="javascript:void(0);" onClick={logout}>
+      <a href="#!" onClick={logout}>
         {name}
       </a>
     </p>
