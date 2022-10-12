@@ -72,7 +72,11 @@ function Articles(props: Props): JSX.Element {
   useEffect((): void => {
     const docRef = collectionGroup(db, "articles");
     let q = query(docRef, orderBy("timestamp", "desc"));
-    if (separatedData !== null && (separatedData[0] !== undefined && separatedData[1] !== undefined))
+    if (
+      separatedData !== null &&
+      separatedData[0] !== undefined &&
+      separatedData[1] !== undefined
+    )
       q = query(
         docRef,
         orderBy("timestamp", "desc"),
