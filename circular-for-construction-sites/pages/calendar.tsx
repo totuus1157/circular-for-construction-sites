@@ -29,9 +29,6 @@ function News(): JSX.Element {
   const [counter, setCounter] = useState(0);
   const router = useRouter();
 
-  console.log("selectedAreaAndSection: ", selectedAreaAndSection);
-  console.log("counter: ", counter);
-
   const titleProp: string = "カレンダー";
 
   useEffect((): void => {
