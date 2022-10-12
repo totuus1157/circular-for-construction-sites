@@ -53,13 +53,6 @@ function Calendar(props: Props): JSX.Element {
     });
   }, [counter]);
 
-  /* const doDelete = (e: EventClickArg, docId: string): void => {
-   *   console.log("e.event.title: ", e.event.title);
-   *   console.log("docId: ", docId);
-   *   confirm(`「${e.event.title}」を削除しますか？`) &&
-   *     console.log("削除しますた");
-   * };
-   */
   return (
     <FullCalendar
       plugins={[dayGridPlugin, timeGridPlugin]}
@@ -75,7 +68,6 @@ function Calendar(props: Props): JSX.Element {
       locales={[jaLocale]}
       locale="ja"
       events={data}
-      eventClick={(info): void => doDelete(info, data.docId)}
     />
   );
 }
