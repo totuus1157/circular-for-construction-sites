@@ -1,22 +1,45 @@
 import { useState, useEffect } from "react";
 import { db } from "../components/firebase";
-import { doc, collectionGroup, getDocs, deleteDoc } from "firebase/firestore";
+import {
+  doc,
+  collectionGroup,
+  getDocs,
+  deleteDoc,
+  query,
+  where,
+} from "firebase/firestore";
 import FullCalendar, { EventClickArg } from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import jaLocale from "@fullcalendar/core/locales/ja";
 
-function Calendar(props: { counter: number }): JSX.Element {
-  const { counter } = props;
+type Props = { selectedAreaAndSection: string; counter: number };
+
+function Calendar(props: Props): JSX.Element {
+  const { selectedAreaAndSection, counter } = props;
 
   type Mydata = { title: string; start: string; end: string; docId: string };
 
   const mydata: Mydata[] = [];
   const [data, setData] = useState(mydata);
 
+  const separatedData =
+    selectedAreaAndSection !== "all" ? selectedAreaAndSection.split(",") : null;
+
   useEffect((): void => {
     const docRef = collectionGroup(db, "schedules");
-    getDocs(docRef).then((snapshot): void => {
+    let q = docRef;
+    if (
+      separatedData !== null &&
+      separatedData[0] !== undefined &&
+      separatedData[1] !== undefined
+    )
+      q = query(
+        docRef,
+        where("from.area", "==", separatedData[0]),
+        where("from.section", "==", separatedData[1])
+      );
+    getDocs(q).then((snapshot): void => {
       snapshot.forEach((document): void => {
         const doc = document.data();
         mydata.push({
