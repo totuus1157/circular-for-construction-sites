@@ -12,6 +12,8 @@ type Props = {
   userInfoName: string;
   canAdmin: boolean;
   confirmed: { id: string; name: string }[];
+  counter: number;
+  setCounter: (arg0: number) => void;
 };
 
 function ConfirmBadge(props: Props) {
@@ -22,6 +24,8 @@ function ConfirmBadge(props: Props) {
     userInfoName,
     canAdmin,
     confirmed,
+    counter,
+    setCounter,
   } = props;
 
   const confirm = async (
@@ -29,15 +33,16 @@ function ConfirmBadge(props: Props) {
     contributorId: string
   ): Promise<void> => {
     if (userInfoName !== "") {
-      console.log("ここまで来た", userInfoName);
       const docRef = doc(db, "users", contributorId, "articles", documentId);
       await updateDoc(docRef, {
         confirmed: arrayUnion({ id: userInfoEmail, name: userInfoName }),
-      }).then((): void => {
-        console.log("読んだ！");
-      });
-    } else {
-      console.log("名前が空っぽだよ！", userInfoName);
+      })
+        .then((): void => {
+          setCounter(counter + 1);
+        })
+        .catch((err): void => {
+          console.log("err: ", err);
+        });
     }
   };
 

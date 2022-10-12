@@ -100,6 +100,8 @@ function Articles(props: Props): JSX.Element {
                     documentId={document.id}
                     contributorId={doc.email}
                     confirmed={doc.confirmed}
+                    counter={counter}
+                    setCounter={setCounter}
                   />
                 </Card.Text>
               </Card.Body>
