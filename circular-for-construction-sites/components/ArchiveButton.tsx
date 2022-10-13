@@ -26,7 +26,7 @@ function ArchiveButton(props: Props): JSX.Element {
 
   return (
     <Button size="sm" onClick={(): Promise<void> => archive(documentId)}>
-      アーカイブ
+      <i className="bi bi-archive"></i>
     </Button>
   );
 }
