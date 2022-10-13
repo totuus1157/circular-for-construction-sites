@@ -46,7 +46,18 @@ function ConfirmBadge(props: Props) {
     }
   };
 
-  if (contributorId === userInfoEmail || canAdmin === true) {
+  const findConfirmerFromList = (): boolean  => {
+    return confirmed.some((e): boolean => {
+      return e.id === userInfoEmail;
+    });
+  };
+
+  console.log("findConfirmerFromList(): ", findConfirmerFromList());
+
+  if (
+    contributorId === userInfoEmail ||
+    (canAdmin === true && findConfirmerFromList())
+  ) {
     return (
       <OverlayTrigger
         placement="bottom-start"
@@ -63,11 +74,7 @@ function ConfirmBadge(props: Props) {
         </Button>
       </OverlayTrigger>
     );
-  } else if (
-    confirmed.some((e): boolean => {
-      return e.id === userInfoEmail;
-    })
-  ) {
+  } else if (findConfirmerFromList()) {
     return (
       <Button variant="success" size="sm">
         既読数 <Badge bg="secondary">{confirmed.length}</Badge>
