@@ -9,6 +9,7 @@ import { db, auth } from "../components/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
 
 function News(): JSX.Element {
   type UserInfo = {
