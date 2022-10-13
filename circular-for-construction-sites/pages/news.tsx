@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import Header from "../components/Header";
 import ControlPanel from "../components/ControlPanel";
 import SecondLine from "../components/SecondLine";
-import Articles from "../components/Articles";
+import ArticlesMain from "../components/ArticlesMain";
 import Footer from "../components/Footer";
 import { db, auth } from "../components/firebase";
 import { doc, getDoc } from "firebase/firestore";
@@ -79,7 +79,7 @@ function News(): JSX.Element {
           setCounter={setCounter}
           name={userInfo.name}
         />
-        <Articles
+        <ArticlesMain
           userInfoEmail={userInfo.email}
           userInfoName={userInfo.name}
           canAdmin={userInfo.admin}

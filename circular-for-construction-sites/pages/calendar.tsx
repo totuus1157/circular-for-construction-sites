@@ -3,14 +3,14 @@ import { useRouter } from "next/router";
 import Header from "../components/Header";
 import ControlPanel from "../components/ControlPanel";
 import SecondLine from "../components/SecondLine";
-import Calendar from "../components/Calendar";
+import CalendarMain from "../components/CalendarMain";
 import Footer from "../components/Footer";
 import { db, auth } from "../components/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-function News(): JSX.Element {
+function CalendarMain(): JSX.Element {
   type UserInfo = {
     area: string;
     email: string;
@@ -80,7 +80,7 @@ function News(): JSX.Element {
           setCounter={setCounter}
           name={userInfo.name}
         />
-        <Calendar
+        <CalendarMain
           selectedAreaAndSection={selectedAreaAndSection}
           counter={counter}
         />
@@ -91,4 +91,4 @@ function News(): JSX.Element {
   return <></>;
 }
 
-export default News;
+export default CalendarMain;

@@ -22,7 +22,7 @@ type Props = {
   setCounter: (arg0: number) => void;
 };
 
-function Archives(props: Props): JSX.Element {
+function ArchivesMain(props: Props): JSX.Element {
   const {
     userInfoEmail,
     userInfoName,
@@ -154,4 +154,4 @@ function Archives(props: Props): JSX.Element {
   );
 }
 
-export default Archives;
+export default ArchivesMain;

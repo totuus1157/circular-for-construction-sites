@@ -3,14 +3,14 @@ import { useRouter } from "next/router";
 import Header from "../components/Header";
 import ControlPanel from "../components/ControlPanel";
 import SecondLine from "../components/SecondLine";
-import Archives from "../components/Archives";
+import ArchivesMain from "../components/ArchivesMain";
 import Footer from "../components/Footer";
 import { db, auth } from "../components/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-function archives(): JSX.Element {
+function Archives(): JSX.Element {
   type UserInfo = {
     admin: boolean;
     area: string;
@@ -78,7 +78,7 @@ function archives(): JSX.Element {
           setCounter={setCounter}
           name={userInfo.name}
         />
-        <Archives
+        <ArchivesMain
           userInfoEmail={userInfo.email}
           userInfoName={userInfo.name}
           canAdmin={userInfo.admin}
@@ -93,4 +93,4 @@ function archives(): JSX.Element {
   return <></>;
 }
 
-export default archives;
+export default Archives;

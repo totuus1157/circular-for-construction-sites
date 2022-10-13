@@ -25,7 +25,7 @@ type Props = {
   setCounter: (arg0: number) => void;
 };
 
-function Articles(props: Props): JSX.Element {
+function ArticlesMain(props: Props): JSX.Element {
   const {
     userInfoEmail,
     userInfoName,
@@ -187,4 +187,4 @@ function Articles(props: Props): JSX.Element {
   );
 }
 
-export default Articles;
+export default ArticlesMain;

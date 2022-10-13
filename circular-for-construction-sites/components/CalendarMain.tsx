@@ -1,21 +1,19 @@
 import { useState, useEffect } from "react";
 import { db } from "../components/firebase";
 import {
-  doc,
   collectionGroup,
   getDocs,
-  deleteDoc,
   query,
   where,
 } from "firebase/firestore";
-import FullCalendar, { EventClickArg } from "@fullcalendar/react";
+import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import jaLocale from "@fullcalendar/core/locales/ja";
 
 type Props = { selectedAreaAndSection: string; counter: number };
 
-function Calendar(props: Props): JSX.Element {
+function CalendarMain(props: Props): JSX.Element {
   const { selectedAreaAndSection, counter } = props;
 
   type Mydata = { title: string; start: string; end: string; docId: string };
@@ -72,4 +70,4 @@ function Calendar(props: Props): JSX.Element {
   );
 }
 
-export default Calendar;
+export default CalendarMain;
