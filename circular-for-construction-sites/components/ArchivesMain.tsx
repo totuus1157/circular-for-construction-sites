@@ -85,7 +85,7 @@ function ArchivesMain(props: Props): JSX.Element {
     getDocs(q).then((snapshot): void => {
       snapshot.forEach((document): void => {
         const doc = document.data();
-        if (doc.archive === true) {
+        if (doc.archive.includes(userInfoEmail)) {
           contentArray.push({
             docId: document.id,
             title: doc.title,

@@ -99,7 +99,7 @@ function ArticlesMain(props: Props): JSX.Element {
     getDocs(q).then((snapshot): void => {
       snapshot.forEach((document): void => {
         const doc = document.data();
-        if (doc.archive === false) {
+        if (doc.archive.includes(userInfoEmail) === false) {
           contentArray.push({
             docId: document.id,
             title: doc.title,
@@ -123,6 +123,7 @@ function ArticlesMain(props: Props): JSX.Element {
                   <div>
                     {(doc.email === userInfoEmail || canAdmin === true) && (
                       <ArchiveButton
+                        userInfoEmail={userInfoEmail}
                         documentId={document.id}
                         contributorId={doc.email}
                         counter={counter}
@@ -131,7 +132,7 @@ function ArticlesMain(props: Props): JSX.Element {
                     )}{" "}
                     {doc.email === userInfoEmail && (
                       <Button
-                        variant='danger'
+                        variant="danger"
                         size="sm"
                         onClick={(): Promise<void> => doDelete(document.id)}
                       >

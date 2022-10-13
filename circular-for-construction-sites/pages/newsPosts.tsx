@@ -68,7 +68,7 @@ const NewsPosts: NextPage = (): JSX.Element => {
       email: userInfo.email,
       confirmed: [],
       timestamp: serverTimestamp(),
-      archive: false,
+      archive: [],
     }).then((): void => {
       router.push("/news");
     });
