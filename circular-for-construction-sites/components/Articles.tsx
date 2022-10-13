@@ -131,10 +131,11 @@ function Articles(props: Props): JSX.Element {
                     )}{" "}
                     {doc.email === userInfoEmail && (
                       <Button
+                        variant='danger'
                         size="sm"
                         onClick={(): Promise<void> => doDelete(document.id)}
                       >
-                        さ
+                        <i className="bi bi-x-circle"></i>
                       </Button>
                     )}
                   </div>
