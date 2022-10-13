@@ -52,8 +52,6 @@ function ConfirmBadge(props: Props) {
     });
   };
 
-  console.log("findConfirmerFromList(): ", findConfirmerFromList());
-
   if (
     contributorId === userInfoEmail ||
     (canAdmin === true && findConfirmerFromList())
