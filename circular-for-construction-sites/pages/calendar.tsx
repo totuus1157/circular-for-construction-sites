@@ -10,7 +10,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-function CalendarMain(): JSX.Element {
+function Calendar(): JSX.Element {
   type UserInfo = {
     area: string;
     email: string;
@@ -91,4 +91,4 @@ function CalendarMain(): JSX.Element {
   return <></>;
 }
 
-export default CalendarMain;
+export default Calendar;
