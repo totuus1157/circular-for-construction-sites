@@ -76,7 +76,7 @@ function ConfirmBadge(props: Props) {
   } else {
     return (
       <Button
-        variant="primary"
+        variant="info"
         size="sm"
         onClick={(): Promise<void> => confirm(documentId, contributorId)}
       >
