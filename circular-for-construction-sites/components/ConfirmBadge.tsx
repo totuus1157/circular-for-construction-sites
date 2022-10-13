@@ -58,7 +58,7 @@ function ConfirmBadge(props: Props) {
           </Tooltip>
         }
       >
-        <Button variant="primary" size="sm">
+        <Button variant="success" size="sm">
           ◀︎既読者 <Badge bg="secondary">{confirmed.length}︎</Badge>
         </Button>
       </OverlayTrigger>
@@ -69,7 +69,7 @@ function ConfirmBadge(props: Props) {
     })
   ) {
     return (
-      <Button variant="primary" size="sm">
+      <Button variant="success" size="sm">
         既読数 <Badge bg="secondary">{confirmed.length}</Badge>
       </Button>
     );
