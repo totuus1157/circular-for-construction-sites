@@ -13,7 +13,7 @@ const Home: NextPage = (): JSX.Element => {
       <Header title="Top Page" />
 
       <main className={styles.main}>
-        <h1 className={styles.title}>電子観覧版</h1>
+        <h1 className={styles.title}>電子回覧板</h1>
 
         <p className={styles.description}>for 建設現場</p>
 
